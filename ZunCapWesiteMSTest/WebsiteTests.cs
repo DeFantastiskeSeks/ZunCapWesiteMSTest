@@ -3,7 +3,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
-using seleniumExtras
+using SeleniumExtras.WaitHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ZunCapWesiteMSTest
@@ -240,19 +240,13 @@ namespace ZunCapWesiteMSTest
 
 
 
-            _driver.SwitchTo().Alert().Accept();
+
 
             WebDriverWait driverWait = new(_driver, TimeSpan.FromSeconds(10));
-            IWebElement popUp = driverWait.Until(d => d.);
-            IAlert alert = driverWait.Until();
-            IAlert alert = driverWait.Until(ExpectedConditions.AlertIsPresent());
-            // Motager =>
-            // alertMaxUV() { alert('Du har modtaget den anbefalede mængde UV') }
 
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-
+            _driver.SwitchTo().Alert().Accept();
             
-            string alertText = alert.Text;
+            IAlert alert = driverWait.Until(ExpectedConditions.AlertIsPresent());
             Assert.AreEqual("Du har modtaget den anbefalede mængde UV", alert.Text);
 
 
