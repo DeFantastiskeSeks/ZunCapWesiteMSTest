@@ -3,6 +3,8 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
+using seleniumExtras
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ZunCapWesiteMSTest
 {
@@ -227,6 +229,34 @@ namespace ZunCapWesiteMSTest
             Console.WriteLine("Hudtype-" + hudtype.Text);
             Assert.AreEqual("15", hudtyperesult.Text);
             Assert.AreEqual("5", hudtype.Text);
+        }
+
+        [TestMethod]
+        public void Notify_Test()
+        {
+            _driver.Navigate().GoToUrl("http://localhost:5173/userUV");
+
+
+
+
+
+            _driver.SwitchTo().Alert().Accept();
+
+            WebDriverWait driverWait = new(_driver, TimeSpan.FromSeconds(10));
+            IWebElement popUp = driverWait.Until(d => d.);
+            IAlert alert = driverWait.Until();
+            IAlert alert = driverWait.Until(ExpectedConditions.AlertIsPresent());
+            // Motager =>
+            // alertMaxUV() { alert('Du har modtaget den anbefalede mængde UV') }
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+
+            
+            string alertText = alert.Text;
+            Assert.AreEqual("Du har modtaget den anbefalede mængde UV", alert.Text);
+
+
+
         }
     }
 }
