@@ -236,20 +236,13 @@ namespace ZunCapWesiteMSTest
         {
             _driver.Navigate().GoToUrl("http://localhost:5173/userUV");
 
-
-
-
-
-
-
             WebDriverWait driverWait = new(_driver, TimeSpan.FromSeconds(10));
 
-            _driver.SwitchTo().Alert().Accept();
-            
-            IAlert alert = driverWait.Until(ExpectedConditions.AlertIsPresent());
-            Assert.AreEqual("Du har modtaget den anbefalede mængde UV", alert.Text);
+            IAlert alertTimer = driverWait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert alert = _driver.SwitchTo().Alert();
+            Assert.AreEqual("Du har modtaget den anbefalede mængde UV", alert.Text, "Test Failed: " + alert.Text);
 
-
+            alert.Accept();
 
         }
     }
